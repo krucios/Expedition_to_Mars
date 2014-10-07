@@ -14,9 +14,13 @@ void main()
 			++freqs[word.idup];
 		}
 	}
-
-	foreach (key, value; freqs)
+	string[] words = freqs.keys;
+	sort!((a, b) 
+		{
+			return freqs[a] > freqs[b];
+		})(words);
+	foreach (word; words)
 	{
-		writefln("%6u\t%s", value, key);
+		writefln("%6u\t%s", freqs[word], word);
 	}
 }
