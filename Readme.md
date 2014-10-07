@@ -6,3 +6,4 @@
 * Arrays.d (Console_train)
 * Arrays_2.d (Console_train)
 * Hamlet.d (Console_train)
+* Hamlet_2.d (Console_train)
