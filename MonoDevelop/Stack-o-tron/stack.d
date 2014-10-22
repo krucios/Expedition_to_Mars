@@ -1,29 +1,46 @@
 ﻿module stack;
 
+import std.stdio;
+
 class Stack
 {
-	int[] stack_mem;
+	int[1024] stack_mem;
 	int count;
 
 public:
 	this()
 	{
-		// Constructor code
+		count = 0;
 	}
 
 	bool isEmpty()
 	{
-		// TODO
-		return true;
+		return !stack_mem.length;
 	};
+
 	void push(int n)
 	{
-		// TODO
+		try {
+		stack_mem[count] = n;
+		count++;
+		} catch {
+			writeln ("Error in push()");
+		}
 	};
+
 	int pop()
 	{
-		// TODO
-		return 0;
+		auto ans = stack_mem[count - 1];
+		count--;
+		return ans;
 	};
+
+	void show()
+	{
+		foreach (i; stack_mem)
+		{
+			writeln(i);
+		}
+	}
 }
 

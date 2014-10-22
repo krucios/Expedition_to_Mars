@@ -10,8 +10,17 @@ static int top;
 
 void main(string[] args)
 {
+	Stack st;
 	int cur_word;
+
 	writeln("Stack-o-tron glad to see you! \n");
+
+	for (auto i = 0; i < 10; ++i)
+	{
+		st.push(i);
+	}
+
+	st.show();
 	readln();
 }
 
