@@ -1,1 +1,6 @@
 *.o
+*.sln
+*.dpoj
+/AStyle/bin
+/AStyle/obj
+
