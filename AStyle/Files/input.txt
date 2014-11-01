@@ -1,0 +1,29 @@
+﻿module main;
+
+import std.stdio, std.conv, std.string, std.algorithm, std.file;
+
+int[] separators = [to!int('\n'), to!int(';')]; 
+
+void main(string[] args)
+{
+	string text = readText("Files/input.txt");
+	writeln ("** Start lexical analyze **");
+	foreach (line; stdin.byLine())
+	{
+		string buffer;
+		foreach (symbol; line)
+		{
+			buffer ~= symbol;
+			foreach (sep; separators)
+			{
+				if (symbol == sep)
+				{
+					buffer = strip(buffer);
+					writeln (buffer);
+					buffer.length = 0;
+					break;
+				}
+			}
+		}
+	}
+} lambda {"Hello world"} = 50;
