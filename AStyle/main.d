@@ -1,18 +1,21 @@
 ﻿module main;
 
-import std.stdio, std.conv, std.string, std.algorithm, std.file;
+import std.stdio, std.conv, std.string, std.algorithm, std.file, Automat;
 
 int[] separators = [to!int(';'), to!int('}')]; 
 
 void main(string[] args)
 {
+	Automat machine = new Automat;
+
 	string text = readText("../../Files/input.txt");
 
 	writeln ("** Start lexical analyze **");
 	string buffer;
 	bool is_quotes_open = false;
-	foreach (symbol; text)
+	foreach (symbol; detab(text, 1))
 	{
+		/*
 		if (symbol != '\n' && symbol != '\t')
 			buffer ~= symbol;
 		else
@@ -33,5 +36,7 @@ void main(string[] args)
 				}
 			}
 		}
+		*/
+		machine.feed(symbol);
 	}
 }
