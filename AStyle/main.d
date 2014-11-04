@@ -9,11 +9,15 @@ void main(string[] args)
 	Automat machine = new Automat;
 
 	string text = readText("../../Files/input.txt");
+	foreach (symbol; text)
+	{
+		writef ("[%03d]", symbol);
+	}
 
-	writeln ("** Start lexical analyze **");
+	writeln ("\n** Start lexical analyze **");
 	string buffer;
-	bool is_quotes_open = false;
-	foreach (symbol; detab(text, 1))
+
+	foreach (symbol; text)
 	{
 		/*
 		if (symbol != '\n' && symbol != '\t')
@@ -39,4 +43,5 @@ void main(string[] args)
 		*/
 		machine.feed(symbol);
 	}
+	machine.feed(' '); // For last symbol in machine;
 }

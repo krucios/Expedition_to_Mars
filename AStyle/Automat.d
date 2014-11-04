@@ -11,10 +11,11 @@ private:
 
 	string current_word;
 
-	string letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMOPQRSTUVWXYZ";
+	string letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMOPQRSTUVWXYZ_";
 	string numbers = "0123456789";
-	string operators = "+-*/<>=&|~!:";
+	string operators = "+-*/<>=&|~!:.%?,^";
 	immutable char[] separators = [' ', '\t', '\n', '(', ')', ';', '{', '}'];
+	immutable char[] spacers = [' ', '\t', '\n'];
 
 public:
 	this()
@@ -26,15 +27,13 @@ public:
 	{
 		if (!current_word.length)
 		{
-			if (!(c == ' ' || c == '\n'))
-			{
-				flag_s = isLetter(c);
-				flag_n = isNumber(c);
-				flag_o = isOperator(c);
-				current_word ~= c;
+			if (isSpacer(c))
 				return;
-			} else
-				return;
+			flag_s = isLetter(c);
+			flag_n = isNumber(c);
+			flag_o = isOperator(c);
+			current_word ~= c;
+			return;
 		}
 		if (!isSeparator(c))
 		{
@@ -52,16 +51,20 @@ public:
 					{
 						writeln (current_word);
 						current_word.length = 0;
-						flag_s = isLetter(c);
-						flag_n = isNumber(c);
-						flag_o = isOperator(c);
-						current_word ~= c;
+						if (!isSpacer(c))
+						{
+							flag_s = isLetter(c);
+							flag_n = isNumber(c);
+							flag_o = isOperator(c);
+							current_word ~= c;
+						}
 					}
 				}
 			}
 			return;
 		} else
 		{
+			/*
 			if (isOperator(c))
 			{
 				writeln (current_word);
@@ -71,9 +74,17 @@ public:
 				flag_o = isOperator(c);
 				current_word ~= c;
 			} else
+			*/
 			{
 				writeln (current_word);
 				current_word.length = 0;
+				if (!isSpacer(c))
+				{
+					flag_s = isLetter(c);
+					flag_n = isNumber(c);
+					flag_o = isOperator(c);
+					current_word ~= c;
+				}
 			}
 		}
 	}
@@ -107,8 +118,16 @@ public:
 		foreach (separator; separators)
 			if (c == separator)
 				return true;
-		if (!flag_o && current_word.length && isOperator(c))
-			return true;
+		//if (!flag_o && current_word.length && isOperator(c))
+		//	return true;
+		return false;
+	}
+
+	bool isSpacer(char c)
+	{
+		foreach (space; spacers)
+			if (space == c)
+				return true;
 		return false;
 	}
 }
