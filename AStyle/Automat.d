@@ -18,7 +18,9 @@ private:
 	immutable char[] separators = [' ', '\t', '\n', '(', ')', ';', '{', '}'];
 	immutable char[] spacers = [' ', '\t', '\n'];
 
-	char SBL_1 = 255;
+	immutable char SPACE = 255; // place a space
+	immutable char TAB = 254; // place a tab
+	immutable char NEWLINE = 253; // place a newline
 
 public:
 	this()
@@ -57,8 +59,22 @@ public:
 						current_word ~= c;
 					else
 					{
-						_text ~= current_word ~ SBL_1;
-						current_word.length = 0;
+						if (endOfLine(current_word))
+						{
+							//current_word ~= NEWLINE;
+							current_word ~= "[ NL]\n";
+							_text ~= current_word;
+							current_word.length = 0;
+							//current_word ~= TAB;
+							current_word ~= "[TAB]";
+						}
+						else
+						{
+							//current_word ~= SPACE;
+							current_word ~= "[ SP]";
+							_text ~= current_word;
+							current_word.length = 0;
+						}
 						if (!isSpacer(c))
 						{
 							flag_s = isLetter(c);
@@ -84,8 +100,22 @@ public:
 			} else
 			*/
 			{
-				_text ~= current_word ~ SBL_1;
-				current_word.length = 0;
+				if (endOfLine(current_word))
+				{
+					//current_word ~= NEWLINE;
+					current_word ~= "[ NL]\n";
+					_text ~= current_word;
+					current_word.length = 0;
+					//current_word ~= TAB;
+					current_word ~= "[TAB]";
+				}
+				else
+				{
+					//current_word ~= SPACE;
+					current_word ~= "[ SP]";
+					_text ~= current_word;
+					current_word.length = 0;
+				}
 				if (!isSpacer(c))
 				{
 					flag_s = isLetter(c);
@@ -95,6 +125,11 @@ public:
 				}
 			}
 		}
+	}
+
+	bool endOfLine(string word)
+	{
+		return (word[word.length - 1] == ';') ? true : false;
 	}
 
 	bool isLetter(char c)

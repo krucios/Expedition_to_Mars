@@ -11,9 +11,9 @@ private:
 
 	string current_word;
 
-	string letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMOPQRSTUVWXYZ_";
-	string numbers = "0123456789";
-	string operators = "+-*/<>=&|~!:.%?,^";
+	string letters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMOPQRSTUVWXYZ_";
+	string numbers="0123456789";
+	string operators="+-*/<>=&|~!:.%?,^";
 	immutable char[] separators = [' ', '\t', '\n', '(', ')', ';', '{', '}'];
 	immutable char[] spacers = [' ', '\t', '\n'];
 
