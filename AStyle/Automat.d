@@ -10,17 +10,25 @@ private:
 	bool flag_o;
 
 	string current_word;
+	string _text;
 
-	string letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMOPQRSTUVWXYZ_";
+	string letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_";
 	string numbers = "0123456789";
 	string operators = "+-*/<>=&|~!:.%?,^";
 	immutable char[] separators = [' ', '\t', '\n', '(', ')', ';', '{', '}'];
 	immutable char[] spacers = [' ', '\t', '\n'];
 
+	char SBL_1 = 255;
+
 public:
 	this()
 	{
 		// Constructor code
+	}
+
+	@property string text()
+	{
+		return _text;
 	}
 
 	void feed(char c)
@@ -49,7 +57,7 @@ public:
 						current_word ~= c;
 					else
 					{
-						writeln (current_word);
+						_text ~= current_word ~ SBL_1;
 						current_word.length = 0;
 						if (!isSpacer(c))
 						{
@@ -76,7 +84,7 @@ public:
 			} else
 			*/
 			{
-				writeln (current_word);
+				_text ~= current_word ~ SBL_1;
 				current_word.length = 0;
 				if (!isSpacer(c))
 				{

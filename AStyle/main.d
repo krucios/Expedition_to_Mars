@@ -1,12 +1,13 @@
 ﻿module main;
 
-import std.stdio, std.conv, std.string, std.algorithm, std.file, Automat;
+import std.stdio, std.conv, std.string, std.algorithm, std.file, Automat, StreamProcessor;
 
 int[] separators = [to!int(';'), to!int('}')]; 
 
 void main(string[] args)
 {
 	Automat machine = new Automat;
+	StreamProcessor converter = new StreamProcessor;
 
 	string text = readText("../../Files/input.txt");
 	foreach (symbol; text)
@@ -42,6 +43,9 @@ void main(string[] args)
 		}
 		*/
 		machine.feed(symbol);
+		converter.feed(symbol);
 	}
 	machine.feed(' '); // For last symbol in machine;
+	writeln (machine.text);
+	//writeln (converter.getText());
 }
