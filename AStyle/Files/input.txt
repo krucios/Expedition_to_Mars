@@ -27,35 +27,35 @@ public:
 	{
 		if (!current_word.length)
 		{
-			if (isSpacer(c))
+			if (isSpacer(to!string(c)))
 				return;
-			flag_s = isLetter(c);
-			flag_n = isNumber(c);
-			flag_o = isOperator(c);
+			flag_s = isLetter(to!string(c));
+			flag_n = isNumber(to!string(c));
+			flag_o = isOperator(to!string(c));
 			current_word ~= c;
 			return;
 		}
-		if (!isSeparator(c))
+		if (!isSeparator(to!string(c)))
 		{
-			if ((isLetter(c) || isNumber(c)) && flag_s)
+			if ((isLetter(to!string(c)) || isNumber(to!string(c))) && flag_s)
 				current_word ~= c;
 			else
 			{
-				if (isNumber(c) && flag_n)
+				if (isNumber(to!string(c)) && flag_n)
 					current_word ~= c;
 				else
 				{
-					if (isOperator(c) && flag_o)
+					if (isOperator(to!string(c)) && flag_o)
 						current_word ~= c;
 					else
 					{
 						writeln (current_word);
 						current_word.length = 0;
-						if (!isSpacer(c))
+						if (!isSpacer(to!string(c)))
 						{
-							flag_s = isLetter(c);
-							flag_n = isNumber(c);
-							flag_o = isOperator(c);
+							flag_s = isLetter(to!string(c));
+							flag_n = isNumber(to!string(c));
+							flag_o = isOperator(to!string(c));
 							current_word ~= c;
 						}
 					}
@@ -65,24 +65,24 @@ public:
 		} else
 		{
 			/*
-			if (isOperator(c))
+			if (isOperator(to!string(c)))
 			{
 				writeln (current_word);
 				current_word.length = 0;
-				flag_s = isLetter(c);
-				flag_n = isNumber(c);
-				flag_o = isOperator(c);
+				flag_s = isLetter(to!string(c));
+				flag_n = isNumber(to!string(c));
+				flag_o = isOperator(to!string(c));
 				current_word ~= c;
 			} else
 			*/
 			{
 				writeln (current_word);
 				current_word.length = 0;
-				if (!isSpacer(c))
+				if (!isSpacer(to!string(c)))
 				{
-					flag_s = isLetter(c);
-					flag_n = isNumber(c);
-					flag_o = isOperator(c);
+					flag_s = isLetter(to!string(c));
+					flag_n = isNumber(to!string(c));
+					flag_o = isOperator(to!string(c));
 					current_word ~= c;
 				}
 			}
@@ -118,7 +118,7 @@ public:
 		foreach (separator; separators)
 			if (c == separator)
 				return true;
-		//if (!flag_o && current_word.length && isOperator(c))
+		//if (!flag_o && current_word.length && isOperator(to!string(c)))
 		//	return true;
 		return false;
 	}
