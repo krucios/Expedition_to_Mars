@@ -1,6 +1,14 @@
 ﻿module main;
 
-import std.stdio, std.conv, std.string, std.algorithm, std.file, Automat;
+import  std.stdio, 
+		std.conv, 
+		std.string, 
+		std.algorithm, 
+		std.file,
+		std.json,
+		std.process,
+		Automat, 
+		BNFParesr;
 
 void main(string[] args)
 {
@@ -21,4 +29,11 @@ void main(string[] args)
 	}
 	machine.feed(' '); // For last symbol in machine;
 	writeln (machine.text);
+	
+	// JSON Train ***************************************
+
+	JSONValue[string] tree = parseBNF("../../Files/BNF.json").object;
+	string letters = tree["letter"].str;
+
+	assert(letters == "a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r|s|t|u|v|w|x|y|z|A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z");
 }

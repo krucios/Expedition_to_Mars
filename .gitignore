@@ -1,6 +1,7 @@
 *.o
 *.sln
-*.dpoj
+*.dproj
+*.userprefs
 /AStyle/bin
 /AStyle/obj
 
